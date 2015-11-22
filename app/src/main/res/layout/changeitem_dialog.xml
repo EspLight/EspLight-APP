@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Name:" />
+
+    <EditText
+        android:id="@+id/editname"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter name here.."
+        android:padding="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Pincode" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberPassword"
+        android:ems="10"
+        android:hint="Enter pincode here.."
+        android:id="@+id/editPin" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="IP:" />
+
+
+
+    <LinearLayout
+        android:id="@+id/ipListlayout"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+
+        <RadioGroup
+            android:id="@+id/ipListGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Manual IP"
+                android:id="@+id/radioButton3"
+                android:checked="true" />
+        </RadioGroup>
+
+
+ </LinearLayout>
+
+
+
+    <EditText
+        android:id="@+id/editip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter manual IP adress here.."
+        android:padding="10dp" />
+
+</LinearLayout>

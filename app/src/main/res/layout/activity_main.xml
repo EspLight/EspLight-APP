@@ -1,0 +1,187 @@
+<!-- A DrawerLayout is intended to be used as the top-level content view using match_parent for both width and height to consume the full space available. -->
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:id="@+id/drawer_layout"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <!-- As the main content view, the view below consumes the entire
+         space available using match_parent in both dimensions. -->
+    <FrameLayout android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/relativeLayout">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/effectButtons">
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="RGB"
+                            android:id="@+id/buttonRGB" />
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="rainbow"
+                            android:id="@+id/buttonRAINBOW"
+                            android:layout_gravity="right|center_vertical" />
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Fade"
+                            android:id="@+id/buttonFADE"
+                            android:layout_gravity="center" />
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/relativeLayout"
+                android:layout_above="@+id/linearLayout">
+
+                <android.widget.ColorPicker
+                            android:id="@+id/colorPicker"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:visibility="visible"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_gravity="center_horizontal|top"/>
+            </FrameLayout>
+
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/linearLayout"
+                android:layout_marginLeft="5px"
+                android:layout_marginRight="5px"  >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <Button
+                                style="?android:attr/buttonStyleSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/abc_action_bar_progress_bar_size"
+                                android:text="white"
+                                android:id="@+id/buttonWhite"
+                        android:layout_gravity="left|bottom"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true" />
+
+                    <TextView
+                                    android:layout_width="wrap_content"
+                        android:layout_height="@dimen/abc_action_bar_progress_bar_size"
+
+                                    android:textAppearance="?android:attr/textAppearanceLarge"
+                                    android:text="speed         "
+                                    android:id="@+id/textSpeed"
+                            android:layout_gravity="left|bottom" />
+
+                    <Button
+                                    style="?android:attr/buttonStyleSmall"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="@dimen/abc_action_bar_progress_bar_size"
+                                    android:text="black"
+                                    android:id="@+id/buttonBlack"
+                            android:layout_gravity="right|bottom"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true" />
+
+                    <SeekBar
+                                    android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+                        android:id="@+id/speedBar"
+                        android:max="255"
+                                    android:progress="50"
+                            android:layout_gravity="right|bottom"
+                        android:layout_toRightOf="@+id/textSpeed"
+                        android:layout_toEndOf="@+id/textSpeed"
+                        android:layout_marginLeft="5px"
+                        android:layout_marginRight="5px"
+                        android:indeterminate="false" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                                android:layout_width="wrap_content"
+                        android:layout_height="@dimen/abc_action_bar_progress_bar_size"
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:text="brightness"
+                                android:id="@+id/textBrightness"
+                        android:layout_gravity="left|bottom" />
+
+                    <SeekBar
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/brightnessBar"
+                                    android:max="97"
+                                    android:progress="50"
+                            android:layout_gravity="right|bottom"
+                        android:layout_toRightOf="@+id/textBrightness"
+                        android:layout_toEndOf="@+id/textBrightness"
+                        android:layout_marginLeft="5px"
+                        android:layout_marginRight="5px"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+    <!-- android:layout_gravity="start" tells DrawerLayout to treat
+         this as a sliding drawer on the left side for left-to-right
+         languages and on the right side for right-to-left languages.
+         If you're not building against API 17 or higher, use
+         android:layout_gravity="left" instead. -->
+    <!-- The drawer is given a fixed width in dp and extends the full height of
+         the container. -->
+    <fragment android:id="@+id/navigation_drawer"
+        android:layout_width="@dimen/navigation_drawer_width" android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:name="nl.fridgefire.esplight.controller.NavigationDrawerFragment"
+        tools:layout="@layout/fragment_navigation_drawer" />
+
+</android.support.v4.widget.DrawerLayout>
