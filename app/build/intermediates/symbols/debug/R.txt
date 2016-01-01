@@ -456,9 +456,9 @@ int id always 0x7f0c0017
 int id beginning 0x7f0c0014
 int id brightnessBar 0x7f0c005e
 int id buttonBlack 0x7f0c005b
-int id buttonFADE 0x7f0c0056
+int id buttonFADE 0x7f0c0055
 int id buttonPanel 0x7f0c0037
-int id buttonRAINBOW 0x7f0c0055
+int id buttonRAINBOW 0x7f0c0056
 int id buttonRGB 0x7f0c0054
 int id buttonWhite 0x7f0c0059
 int id cancel_action 0x7f0c0068

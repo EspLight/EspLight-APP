@@ -1695,9 +1695,9 @@ containing a value of this type.
         public static final int beginning=0x7f0c0014;
         public static final int brightnessBar=0x7f0c005e;
         public static final int buttonBlack=0x7f0c005b;
-        public static final int buttonFADE=0x7f0c0056;
+        public static final int buttonFADE=0x7f0c0055;
         public static final int buttonPanel=0x7f0c0037;
-        public static final int buttonRAINBOW=0x7f0c0055;
+        public static final int buttonRAINBOW=0x7f0c0056;
         public static final int buttonRGB=0x7f0c0054;
         public static final int buttonWhite=0x7f0c0059;
         public static final int cancel_action=0x7f0c0068;

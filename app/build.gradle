@@ -8,8 +8,8 @@ android {
         applicationId "nl.fridgefire.esplight.controller"
         minSdkVersion 8
         targetSdkVersion 22
-        versionCode 4
-        versionName "2.3"
+        versionCode 5
+        versionName "2.4"
     }
     buildTypes {
         release {

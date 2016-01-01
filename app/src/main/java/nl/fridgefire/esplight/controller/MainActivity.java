@@ -493,7 +493,7 @@ public class MainActivity extends ActionBarActivity
                 buttonBlack.setVisibility(View.GONE);
 
                 //colorPicker.setVisibility(View.GONE);
-                effect_section.set(position, "2");
+                effect_section.set(position, "1");
                 sendData();
 
                 getWindow().getDecorView().findViewById(android.R.id.content).invalidate();
@@ -516,7 +516,7 @@ public class MainActivity extends ActionBarActivity
                 buttonBlack.setVisibility(View.GONE);
                 //colorPicker.setVisibility(View.GONE);
 
-                effect_section.set(position, "1");
+                effect_section.set(position, "2");
                 sendData();
 
                 getWindow().getDecorView().findViewById(android.R.id.content).invalidate();
