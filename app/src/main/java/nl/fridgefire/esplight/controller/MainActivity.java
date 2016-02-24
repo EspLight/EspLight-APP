@@ -300,14 +300,23 @@ public class MainActivity extends ActionBarActivity
 
         RadioGroup ipListGroup = (RadioGroup) promptView.findViewById(R.id.ipListGroup);
 
-        RadioButton[] radiobutton = new RadioButton[esp_finds_name.size()];
+        RadioButton[] radiobutton = new RadioButton[esp_finds_name.size()+1];
+
+       //broadcast button
+       radiobutton[0] = new RadioButton(this);
+
+       radiobutton[0].setText("Broadcast");
+       radiobutton[0].setId(100);
+       ipListGroup.addView(radiobutton[0]);
+
+       //espfind
         for (int i = 0; i < esp_finds_name.size(); i++) {
+            Log.v("this is: ", this.toString());
 
-
-            radiobutton[i] = new RadioButton(this);
-            radiobutton[i].setText(esp_finds_name.get(i));
-            radiobutton[i].setId(i + 100);
-            ipListGroup.addView(radiobutton[i]);
+            radiobutton[i+1] = new RadioButton(this);
+            radiobutton[i+1].setText(esp_finds_name.get(i+1));
+            radiobutton[i+1].setId(i + 101);
+            ipListGroup.addView(radiobutton[i+1]);
         }
 
       ipListGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -316,7 +325,29 @@ public class MainActivity extends ActionBarActivity
            public void onCheckedChanged(RadioGroup group, int checkedId) {
                int checkedButton = checkedId - 100;
                System.out.println(checkedButton);
-               editIp.setText(esp_finds_ip.get(checkedButton).substring(1));
+               System.out.println(R.id.radioButton3);
+               if (checkedButton == 0){
+                   try {
+                       Context mContext = getApplicationContext();
+                       WifiManager wifi = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
+                       DhcpInfo dhcp = wifi.getDhcpInfo();
+                       int broadcast = (dhcp.ipAddress & dhcp.netmask) | ~dhcp.netmask;
+                       byte[] quads = new byte[4];
+                       for (int k = 0; k < 4; k++)
+                           quads[k] = (byte) ((broadcast >> k * 8) & 0xFF);
+                       editIp.setText(InetAddress.getByAddress(quads).toString().substring(1));
+                   }
+                   catch (IOException e) {
+                       Log.e("error", "Could not get broadcast Ip", e);
+                       editIp.setText("broadcast error");
+                   }
+               }
+               else if (checkedButton + 100 == R.id.radioButton3){
+                   editIp.setText("");
+               }
+               else {
+                   editIp.setText(esp_finds_ip.get(checkedButton).substring(1));
+               }
            }
        });
 
@@ -535,7 +566,8 @@ public class MainActivity extends ActionBarActivity
 
                 rgbRed_section.set(position, "255");
                 rgbGreen_section.set(position, "255");
-                rgbBlue_section.set(position, "255");;
+                rgbBlue_section.set(position, "255");
+                ;
                 sendData();
             }
 
@@ -656,10 +688,24 @@ public class MainActivity extends ActionBarActivity
         esp_finds_ip.clear();
 
         try{
+            Context mContext=getApplicationContext();
+            WifiManager wifi = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
+            DhcpInfo dhcp = wifi.getDhcpInfo();
+            // handle null somehow
+
+            int broadcast = (dhcp.ipAddress & dhcp.netmask) | ~dhcp.netmask;
+            byte[] quads = new byte[4];
+            for (int k = 0; k < 4; k++)
+                quads[k] = (byte) ((broadcast >> k * 8) & 0xFF);
+            Log.v("IP broadcast: ", InetAddress.getByAddress(quads).toString());
+
+
             DatagramSocket socket = new DatagramSocket(1337);
             socket.setBroadcast(true);
 
-            DatagramPacket packet = new DatagramPacket(data.getBytes(), data.length(), InetAddress.getByName("10.42.255.255"), 1337);
+            DatagramPacket packet = new DatagramPacket(data.getBytes(), data.length(), InetAddress.getByAddress(quads), 1337);
+            //DatagramPacket packet = new DatagramPacket(data.getBytes(), data.length(), InetAddress.getByName("10.42.255.255"), 1337);
+
             socket.send(packet);
             socket.close();
 
@@ -689,6 +735,7 @@ public class MainActivity extends ActionBarActivity
         } catch (IOException e) {
             Log.e("error", "Could not send discovery request", e);
         }
+
     }
 
     private class UdpSendAsyncTask extends AsyncTask<String, Void, Void> {
@@ -708,7 +755,7 @@ public class MainActivity extends ActionBarActivity
 
             try {
                 DatagramSocket socket = new DatagramSocket(1337);
-                socket.setBroadcast(false);
+                socket.setBroadcast(true);
 
                 InetAddress inetAddress = InetAddress.getByName(url);
 
@@ -772,8 +819,8 @@ public class MainActivity extends ActionBarActivity
                 socket.setBroadcast(true);
                 Log.v("udpfind log: ", "2");
 
-            //    DatagramPacket packet = new DatagramPacket(data.getBytes(), data.length(), getBroadcastAddress(), 1337);
-                DatagramPacket packet = new DatagramPacket(data.getBytes(), data.length(), InetAddress.getByName("10.42.255.255"), 1337);
+                DatagramPacket packet = new DatagramPacket(data.getBytes(), data.length(), getBroadcastAddress(), 1337);
+                //DatagramPacket packet = new DatagramPacket(data.getBytes(), data.length(), InetAddress.getByName("10.42.255.255"), 1337);
                 Log.v("udpfind log: ","3.1");
                 socket.send(packet);
                 Log.v("udpfind log: ", "3.2");
